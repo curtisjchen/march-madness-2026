@@ -8,13 +8,13 @@
 ## 📌 Project Overview
 This project leverages historical NCAA tournament data (1985–2025) and advanced seasonal metrics to forecast the 2026 Men's and Women's brackets. The core objective was to minimize the **Brier Score** (predictive accuracy) and provide a probabilistic "Expected Wins" (EV) roadmap for bracket optimization.
 
-## 🚀 Key Features
+## Key Features
 - **Feature Engineering:** Advanced integration of Elo ratings, Strength of Schedule (SOS), "Season Form" (late-season momentum), and Four Factors.
 - **Exhaustive Sweep:** Forward feature selection and hyperparameter tuning to identify "Less is More" architectures (preventing overfitting).
 - **Dependency-Aware Simulator:** A high-speed simulation engine that resolves "First Four" play-in games before propagating winners through the 64-team bracket.
 - **Expected Wins (EV) Analysis:** Moving beyond "Chalk" by calculating the mean number of wins per team across 10,000 alternate realities.
 
-## 📁 Repository Structure
+## Repository Structure
 ```text
 ├── data/
 │   └── raw/                # Kaggle MNCAA/WNCAA data files
