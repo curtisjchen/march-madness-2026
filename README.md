@@ -1,11 +1,11 @@
-# 🏀 2026 March Madness Forecasting & Simulation
+# 2026 March Madness Forecasting & Simulation
 > An end-to-end machine learning pipeline and Monte Carlo simulation engine for predicting NCAA Tournament outcomes.
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 ![ML](https://img.shields.io/badge/framework-XGBoost%20%7C%20LightGBM-green)
 ![Status](https://img.shields.io/badge/status-Live--2026-orange)
 
-## 📌 Project Overview
+## Project Overview
 This project leverages historical NCAA tournament data (1985–2025) and advanced seasonal metrics to forecast the 2026 Men's and Women's brackets. The core objective was to minimize the **Brier Score** (predictive accuracy) and provide a probabilistic "Expected Wins" (EV) roadmap for bracket optimization.
 
 ## Key Features
