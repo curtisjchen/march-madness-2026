@@ -10,7 +10,7 @@ This project leverages historical NCAA tournament data (1985–2025) and advance
 
 ## Key Features
 - **Feature Engineering:** Advanced integration of Elo ratings, Strength of Schedule (SOS), "Season Form" (late-season momentum), and Four Factors.
-- **Exhaustive Sweep:** Forward feature selection and hyperparameter tuning to identify "Less is More" architectures (preventing overfitting).
+- **Exhaustive Sweep:** Forward feature selection and hyperparameter tuning to identify architectures (preventing overfitting).
 - **Dependency-Aware Simulator:** A high-speed simulation engine that resolves "First Four" play-in games before propagating winners through the 64-team bracket.
 - **Expected Wins (EV) Analysis:** Moving beyond "Chalk" by calculating the mean number of wins per team across 10,000 alternate realities.
 
