@@ -1,24 +1,90 @@
-# 2026 March Madness Forecasting & Simulation
-> An end-to-end machine learning pipeline and Monte Carlo simulation engine for predicting NCAA Tournament outcomes.
+# 2026 March Madness Bracket Visualizer
 
-![Python](https://img.shields.io/badge/python-3.10%2B-blue)
-![ML](https://img.shields.io/badge/framework-XGBoost%20%7C%20LightGBM-green)
-![Status](https://img.shields.io/badge/status-Live--2026-orange)
+Interactive bracket app built with FastAPI + React, powered by your ML model predictions.
 
-## Project Overview
-This project leverages historical NCAA tournament data (1985–2025) and advanced seasonal metrics to forecast the 2026 Men's and Women's brackets. The core objective was to minimize the **Brier Score** (predictive accuracy) and provide a probabilistic "Expected Wins" (EV) roadmap for bracket optimization.
+## Project Structure
 
-## Key Features
-- **Feature Engineering:** Advanced integration of Elo ratings, Strength of Schedule (SOS), "Season Form" (late-season momentum), and Four Factors.
-- **Exhaustive Sweep:** Forward feature selection and hyperparameter tuning to identify architectures (preventing overfitting).
-- **Dependency-Aware Simulator:** A high-speed simulation engine that resolves "First Four" play-in games before propagating winners through the 64-team bracket.
-- **Expected Wins (EV) Analysis:** Moving beyond "Chalk" by calculating the mean number of wins per team across 10,000 alternate realities.
+```
+march-madness/
+├── start.sh                   # One-command launcher
+├── backend/
+│   ├── main.py                # FastAPI server (prediction lookups)
+│   ├── requirements.txt
+│   └── data/
+│       └── bracket_data.json  # Teams, seeds, and all ~2,278 predictions
+└── frontend/
+    ├── package.json
+    ├── public/
+│   │   ├── index.html
+    │   └── bracket_data.json  # Static copy (app works without backend)
+    └── src/
+        ├── index.js / index.css
+        ├── App.js             # Main layout + play-in modal + header
+        ├── hooks/
+        │   └── useBracket.js  # All bracket state + advance/reset/auto logic
+        └── components/
+            ├── RegionBracket.js  # One region: R64 → R32 → S16 → E8
+            ├── FinalFour.js      # Center piece: semis + championship
+            ├── Matchup.js        # Two-team game slot pair
+            ├── TeamSlot.js       # Individual team button + hover trigger
+            └── TeamCard.js       # Baseball card popup on hover
+```
 
-## Repository Structure
-```text
-├── data/
-│   └── raw/                # Kaggle MNCAA/WNCAA data files
-├── notebooks/
-│   ├── eda.ipynb           # Mens pipeline
-│   └── womens.ipynb        # Womens pipeline
-└── README.md
+## Quick Start
+
+```bash
+chmod +x start.sh
+./start.sh
+```
+
+Then open **http://localhost:3000**
+
+Or run separately:
+
+```bash
+# Backend
+cd backend && pip install -r requirements.txt
+uvicorn main:app --reload --port 8000
+
+# Frontend (new terminal)
+cd frontend && npm install && npm start
+```
+
+## How It Works
+
+**Data:** `bracket_data.json` contains all 68 teams (seeds, coach names, region) and ~2,278 precomputed win probabilities for every possible tourney matchup pair. Lookup is instant: `predictions[min(t1,t2)_max(t1,t2)]`.
+
+**Predictions on the fly:** No precomputed round odds. When Michigan is clicked to advance, the UI just looks up `getPred(Michigan, opponent)` for whatever matchup arises. Championship path probability = product of win probs along each clicked path.
+
+**Play-in games:** 4 games (South 16, Midwest 11, Midwest 16, West 11). Click "PLAY-IN GAMES" in header to set winners before filling the bracket.
+
+## Features
+
+| Feature | How |
+|---|---|
+| Hover any team | Shows baseball card: coach, seed, region, win % vs current opponent |
+| Click a team | Advances them to the next round |
+| Click again (if already advanced) | De-advances (cascades downstream clears) |
+| ⚡ Auto-Advance Model | Fills entire bracket with model's highest probability pick |
+| Play-In Games | Modal to set First Four winners |
+| Reset | Clears all picks |
+
+## Prediction Model
+
+Features used in training (1985–2025 historical matchups):
+- Seed, ELO, Massey Ordinal (median/mean/min/max)
+- Season stats: win rate, avg margin, off/def efficiency, pace
+- Last 10 game trend: win rate, margin, efficiency, pace
+- SOS (strength of schedule): avg opp ELO, efficiency, win rate
+- Coach tournament history: apps, wins, win rate
+- Four Factors: eFG%, TOR, ORB, FTR
+- Three-point metrics: 3PR, 3P%
+
+## Regions (2026)
+
+| Code | Name | #1 Seed |
+|---|---|---|
+| W | East | Duke |
+| X | South | Florida |
+| Y | Midwest | Michigan |
+| Z | West | Arizona |

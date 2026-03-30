@@ -14,3 +14,5 @@ data/
 notebooks/*.csv
 
 mlruns/*
+
+frontend/node_modules/*

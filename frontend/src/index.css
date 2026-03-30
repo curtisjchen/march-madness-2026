@@ -1,0 +1,57 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #080a0f;
+  --surface:     #10131c;
+  --surface2:    #181c2a;
+  --surface3:    #1e2336;
+  --border:      #2a2f45;
+  --border-hi:   #3d4460;
+  --text:        #f0f2fa;
+  --text-muted:  #8890b0;
+  --text-dim:    #444c6a;
+  --accent:      #f97316;
+  --green:       #22c55e;
+  --green-dim:   rgba(34,197,94,0.15);
+  --red:         #ef4444;
+  --red-dim:     rgba(239,68,68,0.15);
+  --gold:        #f59e0b;
+  --gold-dim:    rgba(245,158,11,0.18);
+
+  --region-east:    #c084fc;
+  --region-south:   #fb923c;
+  --region-midwest: #4ade80;
+  --region-west:    #60a5fa;
+
+  --font-display: 'Bebas Neue', 'Barlow Condensed', sans-serif;
+  --font-body:    'Rajdhani', 'Inter', sans-serif;
+
+  --slot-h:   48px;
+  --slot-w:   176px;
+  --gap:      6px;
+  --round-gap:38px;
+}
+
+html { font-size: 15px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: auto;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 15% 0%, rgba(192,132,252,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 85% 100%, rgba(96,165,250,0.08) 0%, transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 60px,
+      rgba(255,255,255,0.012) 60px,
+      rgba(255,255,255,0.012) 61px
+    );
+}
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 3px; }
