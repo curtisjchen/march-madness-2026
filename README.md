@@ -1,12 +1,19 @@
 # 2026 March Madness Bracket Visualizer
 
-Interactive bracket app built with FastAPI + React, powered by your ML model predictions.
+![March madness web app graphic](https://github.com/curtisjchen/march-madness-2026/blob/master/Screenshot%202026-03-29%20193920.png)
+
+Interactive bracket app built with FastAPI + React, powered by ML model predictions.
 
 ## Project Structure
 
 ```
 march-madness/
 ├── start.sh                   # One-command launcher
+├── data/
+│   ├── raw/      
+│   │   └── {data from kaggle}     
+│   └── submissions/
+│       └── your_mens_submission.csv
 ├── backend/
 │   ├── main.py                # FastAPI server (prediction lookups)
 │   ├── requirements.txt
@@ -15,7 +22,7 @@ march-madness/
 └── frontend/
     ├── package.json
     ├── public/
-│   │   ├── index.html
+    │   ├── index.html
     │   └── bracket_data.json  # Static copy (app works without backend)
     └── src/
         ├── index.js / index.css
@@ -51,6 +58,8 @@ cd frontend && npm install && npm start
 ```
 
 ## How It Works
+
+**Model** model in `notebooks/` was trained on historical data and used to predict tournament results. Submitted as a kaggle competitions submission. This web app visualizes the prediction probabilities and allows the user to inspect all possible matchups (even those that did not happen).
 
 **Data:** `bracket_data.json` contains all 68 teams (seeds, coach names, region) and ~2,278 precomputed win probabilities for every possible tourney matchup pair. Lookup is instant: `predictions[min(t1,t2)_max(t1,t2)]`.
 
