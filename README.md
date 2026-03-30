@@ -74,7 +74,7 @@ cd frontend && npm install && npm start
 | Hover any team | Shows baseball card: coach, seed, region, win % vs current opponent |
 | Click a team | Advances them to the next round |
 | Click again (if already advanced) | De-advances (cascades downstream clears) |
-| ⚡ Auto-Advance Model | Fills entire bracket with model's highest probability pick |
+| Auto-Advance Model | Fills entire bracket with model's highest probability pick |
 | Play-In Games | Modal to set First Four winners |
 | Reset | Clears all picks |
 
